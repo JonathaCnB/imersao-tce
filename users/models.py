@@ -1,11 +1,17 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from localflavor.br.models import BRCNPJField, BRStateField
+from localflavor.br.models import BRCNPJField, BRPostalCodeField, BRStateField
 
 
 class User(AbstractUser):
     cnpj = BRCNPJField(
         "CNPJ",
+        default="",
+        blank=True,
+        null=True,
+    )
+    postal_code = BRPostalCodeField(
+        "CEP",
         default="",
     )
     state = BRStateField(
@@ -45,6 +51,8 @@ class User(AbstractUser):
         max_length=100,
         default="",
     )
+    service_provider = models.BooleanField(default=False)
+    service_user = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Usuário"

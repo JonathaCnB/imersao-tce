@@ -6,7 +6,7 @@
 ## Download & Instruções para instalação.
 
 * 1 - Clone o projeto: git clone https://github.com/JonathaCnB/imersao-tce.git
-* 2 - cd backend
+* 2 - cd imersao-tce
 * 3 - Criar virtual environment: python -m venv venv
 * 4 - venv\scripts\activate
 * 5 - pip install -r requirements.txt
@@ -17,9 +17,9 @@
 ## Tasklist
 
 - [X] Implementar modelo de user personalizado
-- [ ] Criar models conforme modelagem
-- [ ] Implementação da autenticação JWT
-- [ ] CRUD Usuários
+- [X] Criar models conforme modelagem
+- [X] Implementação da autenticação JWT
+- [X] CRUD Usuários
 
 
 ## Endpoints.
