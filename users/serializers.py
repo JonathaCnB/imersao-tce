@@ -76,3 +76,7 @@ class UserFullSerializer(serializers.ModelSerializer):
             "service_provider",
             "service_user",
         ]
+
+    def create(self, validated_data):
+        print(validated_data)
+        return False

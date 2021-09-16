@@ -18,6 +18,7 @@ class Schedule(models.Model):
     date = models.DateField()
     hour = models.TimeField()
     is_active = models.BooleanField(default=False)
+    is_able = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Horario"

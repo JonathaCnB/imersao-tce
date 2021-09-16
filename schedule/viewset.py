@@ -1,8 +1,11 @@
 from datetime import datetime
 
+from django.core.exceptions import ObjectDoesNotExist
+from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from services.models import Service
 
 from .models import Review, Schedule
 from .serializers import (
@@ -36,8 +39,32 @@ class ScheduleViewSet(ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         user = request.user
+        data = request.data
+        service = Service.objects.get(id=data["service"])
+        if service.responsible != user:
+            message = {"detail": "Serviço inválido"}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        if user.service_provider:
+            Schedule.objects.create(
+                service=service, date=data["date"], hour=data["hour"]
+            )
+            return Response({"detail": "Horário cadastrado."})
+        else:
+            return Response(
+                {"detail": "Você não tem permissão para cadastrar horários."}
+            )
 
-        return super().create(request, *args, **kwargs)
+    def update(self, request, *args, **kwargs):
+        pk = kwargs["pk"]
+        user = request.user
+        qs = Schedule.objects.get(id=pk)
+        if not qs.user:
+            qs.user = user
+            qs.save()
+
+            return Response({"detail": "Horário reservado"})
+        else:
+            return Response({"detail": "Horário já foi reservado reservado"})
 
 
 class ReviewViewSet(ModelViewSet):
