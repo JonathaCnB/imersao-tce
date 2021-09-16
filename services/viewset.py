@@ -16,12 +16,9 @@ class ServiceViewSet(ModelViewSet):
         return queryset
 
     def create(self, request, *args, **kwargs):
-        user = User.objects.get(id=1)
+        user = request.user
         data = request.data
-        if hasattr(request, 'data["is_active"]'):
-            is_active = True
-        else:
-            is_active = False
+        is_active = data["is_active"].title()
 
         Service.objects.create(
             service=data["service"],

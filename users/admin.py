@@ -24,6 +24,8 @@ class UserAdmin(auth_admin.UserAdmin):
                 "fields": (
                     "cnpj",
                     "cell_phone",
+                    "service_provider",
+                    "service_user",
                 )
             },
         ),

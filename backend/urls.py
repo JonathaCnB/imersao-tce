@@ -8,7 +8,7 @@ from users import viewsets as v
 router = routers.DefaultRouter()
 router.register(r"users", v.ListUserViewSet, basename="User")
 router.register(r"services", s.ServiceViewSet, basename="Service")
-router.register(r"schedule", sc.ScheduleViewSet)
+router.register(r"schedule", sc.ScheduleViewSet, basename="Schedule")
 router.register(r"review", sc.ReviewViewSet)
 
 urlpatterns = [

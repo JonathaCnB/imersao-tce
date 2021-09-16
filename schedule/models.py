@@ -24,9 +24,15 @@ class Schedule(models.Model):
         verbose_name_plural = "Horarios"
         db_table = "schedule"
 
+    @property
     def get_responsible(self):
         if self.service:
             return self.service.responsible.email
+
+    @property
+    def get_description_service(self):
+        if self.service:
+            return self.service.service
 
     def __str__(self):
         return f"{str(self.id)} - {str(self.service)}"
